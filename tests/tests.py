@@ -1,5 +1,4 @@
-from src.masks import mask_for_bill_number, mask_for_number_card
+from src.widget import data_split, mask_of_card_number_and_bill_number
 
-print(mask_for_number_card(input("Введите номер карты:")))
-print(mask_for_bill_number(input("Введите номер счёта:")))
-
+print(mask_of_card_number_and_bill_number(input("Введите номер карты или счёта:")))
+print(data_split(input("Введите дату:")))
