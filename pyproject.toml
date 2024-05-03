@@ -10,14 +10,11 @@ packages = [{include = "homework_9"}]
 python = "^3.10"
 
 
-[tool.poetry.group.dev.dependencies]
-flake8 = "^7.0.0"
-
-
 [tool.poetry.group.lint.dependencies]
 mypy = "^1.9.0"
 isort = "^5.13.2"
 black = "^24.4.0"
+flake8 = "^7.0.0"
 
 
 [tool.mypy]
