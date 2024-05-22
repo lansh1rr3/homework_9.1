@@ -5,3 +5,5 @@
 2024-05-15 17:20:39.591631 test_function_success_file ok (0:00:00). Inputs: (), {}
 2024-05-15 17:20:39.593578 test_function_error_file error (0:00:00). Inputs: (), {}
 2024-05-15 17:20:59.718915 test_function_success_file ok (0:00:00). Inputs: (), {}
+2024-05-15 17:24:26.192176 test_function_success_file ok (0:00:00). Inputs: (), {}
+2024-05-20 15:36:50.966331 test_function_success_file ok (0:00:00). Inputs: (), {}

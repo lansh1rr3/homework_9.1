@@ -8,6 +8,8 @@ packages = [{include = "homework_9"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+requests = "^2.32.2"
+requests-mock = "^1.12.1"
 
 
 [tool.poetry.group.lint.dependencies]

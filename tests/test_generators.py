@@ -1,5 +1,9 @@
-from src.generators import (filter_transactions_by_currency, generate_card_numbers_list,
-                            get_transaction_descriptions_list, trans)
+from src.generators import (
+    filter_transactions_by_currency,
+    generate_card_numbers_list,
+    get_transaction_descriptions_list,
+    trans,
+)
 
 usd_transactions = filter_transactions_by_currency(trans, "USD")
 descriptions = get_transaction_descriptions_list(trans)
