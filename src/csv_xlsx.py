@@ -21,5 +21,5 @@ def read_xlsx(file_path: str) -> Any:
     return df.to_dict("records")
 
 
-# print(read_xlsx("../data/transactions_excel.xlsx"))
+print(read_xlsx("../data/transactions_excel.xlsx"))
 print(read_csv("../data/transactions.csv"))
