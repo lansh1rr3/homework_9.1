@@ -5,15 +5,12 @@ import pandas as pd
 
 
 def read_csv(file_path: str) -> Any:
-    """
-    Считывает финансовые операции из CSV-файла.
-    """
-    if file_path.endswith(".csv"):
-        df = pd.read_csv(file_path, encoding="utf-8")
-        transactions = df.to_dict(orient="records")
-        return transactions
-    else:
-        return []
+    poos = []
+    with open(file_path, encoding="utf-8") as file:
+        reader = csv.DictReader(file, delimiter=";")
+        for row in reader:
+            poos.append(row)
+    return poos
 
 
 def read_xlsx(file_path: str) -> Any:
@@ -24,5 +21,5 @@ def read_xlsx(file_path: str) -> Any:
     return df.to_dict("records")
 
 
-print(read_csv("../data/transactions.csv"))
-print(read_xlsx("../data/transactions_excel.xlsx"))
+# print(read_csv("../data/transactions.csv"))
+# print(read_xlsx("../data/transactions_excel.xlsx"))

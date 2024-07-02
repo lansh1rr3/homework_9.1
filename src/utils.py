@@ -1,7 +1,7 @@
 import json
+from typing import Any, Dict
 
-import requests
-
+from src.external_api import get_currency_rate
 from src.logger import setup_logger
 
 logger = setup_logger()
@@ -25,44 +25,23 @@ def load_operations(file_path: str) -> list[dict]:
         return []
 
 
-def convert_amount(operation: dict) -> float:
-    """
-    Функция конвертирует сумму транзакции в рубли.
-    """
-    amount = operation["operationAmount"]["amount"]
-    currency = operation["operationAmount"]["currency"]["code"]
-
-    if currency == "RUB":
-        return float(amount)
+def sum_amount(transaction: Dict[str, Any]) -> float:
+    """Возвращает сумму транзакции в рублях."""
+    total = 0.0
+    operation_sum = transaction.get("operationAmount", {})
+    currency_code = operation_sum.get("currency", {}).get("code", "")
+    amount = float(operation_sum.get("amount", 0.0))
+    if currency_code in ["USD", "EUR"]:
+        rate_to_rub = get_currency_rate(currency_code)
+        total += amount * rate_to_rub
+    elif currency_code == "RUB":
+        total += amount
+        logger.info("Function sum_amount completed successfully")
+        return total
     else:
-        url = "https://www.cbr-xml-daily.ru/daily_json.js"
-        response = requests.get(url)
-        data = response.json()
-        usd_rate = float(data["Valute"]["USD"]["Value"])
-        eur_rate = float(data["Valute"]["EUR"]["Value"])
+        logger.error("Something went wrong with the sum_amount function: %(error)s")
+    return total
 
-        if currency == "USD":
-            logger.info("Вывело успешно")
-            return float(amount * usd_rate)
-        elif currency == "EUR":
-            logger.info("Вывело успешно")
-            return float(amount * eur_rate)
-        else:
-            logger.error("Не удалось конвертировать")
-            raise ValueError(f"Unsupported currency: {currency}")
-
-
-dict_for_test = [
-    {
-        "id": 441945886,
-        "state": "EXECUTED",
-        "date": "2019-08-26T10:50:58.294041",
-        "operationAmount": {"amount": 10, "currency": {"name": "USD", "code": "USD"}},
-    }
-]
-
-print(load_operations("../data/operations.json"))
-print(convert_amount(dict_for_test[0]))
 
 value = {
     "id": 441945886,
@@ -74,4 +53,4 @@ value = {
     "to": "Счет 64686473678894779589",
 }
 
-convert_amount(value)
+# convert_amount(value)

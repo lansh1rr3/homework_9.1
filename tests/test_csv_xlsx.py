@@ -1,4 +1,5 @@
 import unittest
+from typing import Any
 from unittest.mock import mock_open, patch
 
 import pandas as pd
@@ -10,7 +11,7 @@ class TestReadCSV(unittest.TestCase):
 
     @patch("builtins.open", new_callable=mock_open, read_data="Date;Description;Amount\n2022-01-01;Salary;1000\n")
     @patch("csv.DictReader")
-    def test_read_csv(self, mock_csvreader, mock_open):
+    def test_read_csv(self, mock_csvreader: Any, mock_open: Any) -> Any:
         """
         Тестовый пример для функции read_csv.
         """
@@ -26,7 +27,7 @@ class TestReadXLSX(unittest.TestCase):
         "pandas.read_excel",
         return_value=pd.DataFrame({"Date": ["2022-01-01"], "Description": ["Salary"], "Amount": [1000]}),
     )
-    def test_read_xlsx(self, mock_read_excel) -> None:
+    def test_read_xlsx(self, mock_read_excel: Any) -> None:
         """
         Тестовый пример для функции read_xlsx.
         """
